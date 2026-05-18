@@ -4,8 +4,7 @@ export interface Answers {
   frontend: 'react-typescript' | 'none';
   frontendRouting: 'react-router' | 'app-router';
   backend: 'spring-boot' | 'nestjs' | 'none';
-  backendArchitecture: 'layered' | 'clean';
-  backendLayeredStyle: 'domain-integrated' | 'domain-separated';
+  serviceImplStyle: 'impl' | 'no-impl';
 }
 
 export async function prompt(): Promise<Answers> {
@@ -41,30 +40,19 @@ export async function prompt(): Promise<Answers> {
     },
     {
       type: 'list',
-      name: 'backendArchitecture',
-      message: '백엔드 아키텍처를 선택하세요:',
+      name: 'serviceImplStyle',
+      message: 'Service 계층 구현 방식을 선택하세요:',
       choices: [
-        { name: 'Layered Architecture', value: 'layered' },
-        { name: 'Clean Architecture', value: 'clean' },
+        { name: 'impl 사용 (UserService 인터페이스 + UserServiceImpl)', value: 'impl' },
+        { name: 'impl 사용 안 함 (UserService 클래스 하나)', value: 'no-impl' },
       ],
-      when: (answers) => answers.backend !== 'none',
-    },
-    {
-      type: 'list',
-      name: 'backendLayeredStyle',
-      message: '패키지 구조 방식을 선택하세요:',
-      choices: [
-        { name: '도메인 통합형 (레이어 우선: controller/user, service/user ...)', value: 'domain-integrated' },
-        { name: '도메인 분리형 (도메인 우선: user/controller, user/service ...)', value: 'domain-separated' },
-      ],
-      when: (answers) => answers.backend === 'spring-boot' && answers.backendArchitecture === 'layered',
+      when: (answers) => answers.backend === 'spring-boot',
     },
   ]);
 
   return {
     ...raw,
     frontendRouting: (raw.frontendRouting as string | undefined) ?? 'react-router',
-    backendArchitecture: (raw.backendArchitecture as string | undefined) ?? 'layered',
-    backendLayeredStyle: (raw.backendLayeredStyle as string | undefined) ?? 'domain-integrated',
+    serviceImplStyle: (raw.serviceImplStyle as string | undefined) ?? 'no-impl',
   } as Answers;
 }
