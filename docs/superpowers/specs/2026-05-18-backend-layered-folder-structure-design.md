@@ -17,44 +17,49 @@
 |------|------|
 | 최상위 기준 | 도메인 (domain-separated 고정) |
 | 도메인 내부 구조 | 레이어 서브폴더 (`controller/`, `service/`, `repository/`, `dto/`, `domain/`) |
-| 서브도메인 중첩 | 허용 (`user/auth/`, `user/profile/` 등) |
+| 서브도메인 중첩 | NestJS만 허용, Spring Boot는 최상위 도메인 패키지만 사용 |
 | 공유 코드 위치 | Spring Boot → `common/`, NestJS → `shared/` |
-| impl 선택 | CLI 질문으로 `impl` / `no-impl` 선택 |
+| impl 선택 | Spring Boot만 CLI 질문 (`impl` / `no-impl`), NestJS는 `no-impl` 고정 |
 
 ---
 
 ## 폴더 구조 골격
 
+**Spring Boot** (서브도메인 중첩 없음 — 복잡해지면 최상위 패키지로 분리)
 ```
-src/
-├── {domain}/
+com.example.app/
+├── user/
 │   ├── controller/
 │   ├── service/
 │   ├── repository/
 │   ├── dto/
-│   ├── domain/
-│   └── {sub-domain}/         # 중첩 허용
-│       ├── controller/
-│       ├── service/
-│       ├── repository/
-│       ├── dto/
-│       └── domain/
-└── common/                   # Spring Boot 공유 코드
+│   └── domain/
+├── order/
+│   ├── controller/
+│   ├── service/
+│   ├── repository/
+│   ├── dto/
+│   └── domain/
+└── common/
     ├── exception/
     ├── response/
     └── util/
 ```
 
+**NestJS** (서브도메인 중첩 허용)
 ```
 src/
-├── {domain}/
+├── user/
 │   ├── controller/
 │   ├── service/
 │   ├── repository/
 │   ├── dto/
 │   ├── domain/
-│   └── {sub-domain}/
-└── shared/                   # NestJS 공유 코드
+│   └── auth/                 # 서브도메인 중첩 허용
+│       ├── controller/
+│       ├── service/
+│       └── dto/
+└── shared/
     ├── exception/
     ├── response/
     └── util/
@@ -79,19 +84,11 @@ user/
     UserService.java           # 구현 클래스
 ```
 
-### impl 사용 (NestJS)
+### NestJS (no-impl 고정)
 ```
 user/
   service/
-    user.service.ts            # 인터페이스
-    user.service.impl.ts       # 구현체
-```
-
-### impl 사용 안 함 (NestJS)
-```
-user/
-  service/
-    user.service.ts            # 구현 클래스
+    user.service.ts            # 구현 클래스 (인터페이스 분리 없음)
 ```
 
 ---
@@ -100,10 +97,10 @@ user/
 
 1. **최상위는 도메인** — `controller/`, `service/` 등 레이어가 루트에 오지 않는다.
 2. **도메인 안에 레이어 서브폴더** — `{domain}/controller/`, `{domain}/service/`, `{domain}/repository/`, `{domain}/dto/`, `{domain}/domain/`
-3. **서브도메인 중첩 허용** — 도메인이 커질 경우 `{domain}/{sub-domain}/` 구조로 분리하며, 동일한 레이어 서브폴더 규칙을 적용한다.
+3. **서브도메인 중첩** — NestJS만 허용 (`{domain}/{sub-domain}/`, 동일한 레이어 서브폴더 규칙 적용). Spring Boot는 최상위 도메인 패키지만 사용하며, 도메인이 커지면 별도 최상위 패키지로 분리한다.
 4. **공유 코드 위치** — Spring Boot는 `common/`, NestJS는 `shared/` (공통 예외, 유틸, 응답 포맷).
 5. **비즈니스 로직은 Service만** — Controller는 요청/응답 변환만 담당한다.
-6. **impl 패턴은 CLI 선택** — 프로젝트 생성 시 `impl` / `no-impl` 중 선택하며, 선택에 따라 해당 템플릿이 적용된다.
+6. **impl 패턴은 Spring Boot만 CLI 선택** — Spring Boot + Layered 선택 시 `impl` / `no-impl` 중 선택한다. NestJS는 `no-impl`로 고정된다.
 
 ---
 
@@ -120,7 +117,7 @@ serviceImplStyle: 'impl' | 'no-impl';
 
 ### `prompt.ts` 질문 변경
 - `backendLayeredStyle` 질문 제거 (domain-separated로 고정)
-- `serviceImplStyle` 질문 추가 — `backendArchitecture === 'layered'`일 때 노출
+- `serviceImplStyle` 질문 추가 — Spring Boot + layered 선택 시에만 노출
 
 ```ts
 {
@@ -131,16 +128,15 @@ serviceImplStyle: 'impl' | 'no-impl';
     { name: 'impl 사용 (UserService 인터페이스 + UserServiceImpl)', value: 'impl' },
     { name: 'impl 사용 안 함 (UserService 클래스 하나)', value: 'no-impl' },
   ],
-  when: (answers) => answers.backendArchitecture === 'layered',
+  when: (answers) => answers.backend === 'spring-boot' && answers.backendArchitecture === 'layered',
 }
 ```
 
 ### `generate.ts` 라우팅 변경
 
 Layered architecture 경로:
-```
-{framework}/architecture/layered/{serviceImplStyle}/folder-structure.md
-```
+- Spring Boot: `spring-boot/architecture/layered/{serviceImplStyle}/folder-structure.md`
+- NestJS: `nestjs/architecture/layered/no-impl/folder-structure.md` (고정)
 
 ---
 
@@ -158,10 +154,8 @@ templates/backend/
 └── nestjs/
     └── architecture/
         └── layered/
-            ├── impl/
-            │   └── folder-structure.md    # 신규
             └── no-impl/
-                └── folder-structure.md    # 신규
+                └── folder-structure.md    # 신규 (no-impl 고정)
 ```
 
 기존 파일 처리:
