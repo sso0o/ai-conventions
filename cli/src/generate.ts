@@ -86,7 +86,7 @@ function copyBackend(
   const archPath =
     answers.backend === 'spring-boot'
       ? path.join(stackSrc, 'architecture', answers.serviceImplStyle, 'folder-structure.md')
-      : path.join(stackSrc, 'architecture', 'folder-structure.md');
+      : path.join(stackSrc, 'architecture', 'no-impl', 'folder-structure.md');
 
   if (fse.pathExistsSync(archPath)) {
     fse.copySync(archPath, path.join(dst, 'folder-structure.md'));
