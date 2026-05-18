@@ -11,6 +11,20 @@ router/
 └── PrivateRoute.tsx   # 인증 가드 컴포넌트
 ```
 
+```tsx
+// src/router/index.tsx
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes';
+
+export default function Router() {
+    return (
+        <BrowserRouter>
+            <AppRoutes />
+        </BrowserRouter>
+    );
+}
+```
+
 **규칙**
 - 라우트 추가는 반드시 `routes.tsx`에서만 합니다.
 - `PrivateRoute.tsx`는 인증 가드 로직만 담고 레이아웃을 포함하지 않습니다.
