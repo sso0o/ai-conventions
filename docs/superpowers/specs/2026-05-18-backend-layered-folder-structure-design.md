@@ -109,6 +109,7 @@ user/
 ### `Answers` 인터페이스
 ```ts
 // 제거
+backendArchitecture: 'layered' | 'clean';
 backendLayeredStyle: 'domain-integrated' | 'domain-separated';
 
 // 추가
@@ -116,8 +117,9 @@ serviceImplStyle: 'impl' | 'no-impl';
 ```
 
 ### `prompt.ts` 질문 변경
+- `backendArchitecture` 질문 제거 (Layered로 고정)
 - `backendLayeredStyle` 질문 제거 (domain-separated로 고정)
-- `serviceImplStyle` 질문 추가 — Spring Boot + layered 선택 시에만 노출
+- `serviceImplStyle` 질문 추가 — Spring Boot 선택 시 노출
 
 ```ts
 {
@@ -159,14 +161,19 @@ templates/backend/
 ```
 
 기존 파일 처리:
+- `spring-boot/architecture/clean/` — 삭제
 - `spring-boot/architecture/layered/domain-integrated/` — 삭제
 - `spring-boot/architecture/layered/domain-separated/` — 내용을 `no-impl/`로 이전 후 삭제
+- `nestjs/architecture/clean/` — 삭제
 - `nestjs/architecture/layered/folder-structure.md` — 빈 파일이므로 삭제
 
 ---
 
 ## 범위 밖
 
-- Clean Architecture 폴더 구조 변경 없음
 - Frontend 관련 변경 없음
-- Spring Boot `domain-integrated` 스타일은 이번 변경으로 제거됨
+
+## 제거 대상 (이번 변경으로 삭제)
+
+- Clean Architecture 선택지 (`backendArchitecture` 질문 및 clean 템플릿 파일)
+- Spring Boot `domain-integrated` 스타일
