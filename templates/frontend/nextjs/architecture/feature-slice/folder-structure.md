@@ -1,1 +1,0 @@
-// templates/frontend/nextjs/architecture/feature-slice/folder-structure.md

@@ -52,26 +52,34 @@ function copyFrontend(
   docsDir: string,
   copiedFiles: string[]
 ): void {
-  const stackSrc = path.join(templateDir, 'templates', 'frontend', answers.frontend);
+  const frontendSrc = path.join(templateDir, 'templates', 'frontend');
   const dst = path.join(docsDir, 'frontend');
   fse.ensureDirSync(dst);
 
-  const archPath = path.join(stackSrc, 'architecture', answers.frontendArchitecture, 'folder-structure.md');
-  const fallbackPath = path.join(stackSrc, 'architecture', 'layered', 'folder-structure.md');
+  // Common frontend .md files directly under templates/frontend/
+  for (const file of fse.readdirSync(frontendSrc)) {
+    const srcPath = path.join(frontendSrc, file);
+    if (fse.statSync(srcPath).isFile() && file.endsWith('.md')) {
+      fse.copySync(srcPath, path.join(dst, file));
+      copiedFiles.push(`docs/frontend/${file}`);
+    }
+  }
+
+  // Routing file based on selected routing strategy
+  const routingPath = path.join(frontendSrc, answers.frontendRouting, 'routing.md');
+  if (fse.pathExistsSync(routingPath)) {
+    fse.copySync(routingPath, path.join(dst, 'routing.md'));
+    copiedFiles.push('docs/frontend/routing.md');
+  }
+
+  // Architecture folder structure
+  const archPath = path.join(frontendSrc, 'architecture', answers.frontendArchitecture, 'folder-structure.md');
+  const fallbackPath = path.join(frontendSrc, 'architecture', 'layered', 'folder-structure.md');
   const resolvedArch = fse.pathExistsSync(archPath) ? archPath : fallbackPath;
 
   if (fse.pathExistsSync(resolvedArch)) {
     fse.copySync(resolvedArch, path.join(dst, 'folder-structure.md'));
     copiedFiles.push('docs/frontend/folder-structure.md');
-  }
-
-  // All .md files directly inside the stack dir (skip architecture/ subdir)
-  for (const file of fse.readdirSync(stackSrc)) {
-    const srcPath = path.join(stackSrc, file);
-    if (fse.statSync(srcPath).isFile() && file.endsWith('.md')) {
-      fse.copySync(srcPath, path.join(dst, file));
-      copiedFiles.push(`docs/frontend/${file}`);
-    }
   }
 }
 

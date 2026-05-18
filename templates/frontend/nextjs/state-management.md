@@ -1,1 +1,0 @@
-// templates/frontend/nextjs/state-management.md

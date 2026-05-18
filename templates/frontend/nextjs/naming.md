@@ -1,1 +1,0 @@
-// templates/frontend/nextjs/naming.md
