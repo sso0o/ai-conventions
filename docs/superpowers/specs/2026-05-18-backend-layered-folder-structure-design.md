@@ -128,7 +128,7 @@ serviceImplStyle: 'impl' | 'no-impl';
     { name: 'impl 사용 (UserService 인터페이스 + UserServiceImpl)', value: 'impl' },
     { name: 'impl 사용 안 함 (UserService 클래스 하나)', value: 'no-impl' },
   ],
-  when: (answers) => answers.backend === 'spring-boot' && answers.backendArchitecture === 'layered',
+  when: (answers) => answers.backend === 'spring-boot',
 }
 ```
 
