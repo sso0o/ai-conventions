@@ -11,7 +11,9 @@
       "Bash(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Recurse -Force)",
       "Bash(Select-Object FullName, PSIsContainer)",
       "Bash(Sort-Object FullName)",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Recurse | ForEach-Object { $_.FullName } | Sort-Object)"
+      "PowerShell(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Recurse | ForEach-Object { $_.FullName } | Sort-Object)",
+      "Bash(grep -v \"^commit\\\\|^Author\\\\|^Date\\\\|^$\\\\|chore:\")",
+      "Bash(git -C \"C:/IDEAWorkspace/SYCHOI/ai-conventions\" log --oneline)"
     ]
   }
 }
