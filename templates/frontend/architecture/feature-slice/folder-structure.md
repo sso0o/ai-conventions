@@ -1,1 +1,0 @@
-// templates/frontend/vite/architecture/feature-slice/folder-structure.md
