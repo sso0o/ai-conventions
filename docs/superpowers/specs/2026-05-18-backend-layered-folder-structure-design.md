@@ -137,8 +137,8 @@ serviceImplStyle: 'impl' | 'no-impl';
 ### `generate.ts` 라우팅 변경
 
 Layered architecture 경로:
-- Spring Boot: `spring-boot/architecture/layered/{serviceImplStyle}/folder-structure.md`
-- NestJS: `nestjs/architecture/layered/no-impl/folder-structure.md` (고정)
+- Spring Boot: `spring-boot/architecture/{serviceImplStyle}/folder-structure.md`
+- NestJS: `nestjs/architecture/no-impl/folder-structure.md` (고정)
 
 ---
 
@@ -148,24 +148,21 @@ Layered architecture 경로:
 templates/backend/
 ├── spring-boot/
 │   └── architecture/
-│       └── layered/
-│           ├── impl/
-│           │   └── folder-structure.md    # 신규
-│           └── no-impl/
-│               └── folder-structure.md    # 신규 (기존 domain-separated 내용 기반)
+│       ├── impl/
+│       │   └── folder-structure.md    # 신규
+│       └── no-impl/
+│           └── folder-structure.md    # 신규 (기존 domain-separated 내용 기반)
 └── nestjs/
     └── architecture/
-        └── layered/
-            └── no-impl/
-                └── folder-structure.md    # 신규 (no-impl 고정)
+        └── no-impl/
+            └── folder-structure.md    # 신규 (no-impl 고정)
 ```
 
 기존 파일 처리:
 - `spring-boot/architecture/clean/` — 삭제
-- `spring-boot/architecture/layered/domain-integrated/` — 삭제
-- `spring-boot/architecture/layered/domain-separated/` — 내용을 `no-impl/`로 이전 후 삭제
+- `spring-boot/architecture/layered/` — 전체 삭제 (신규 구조로 대체)
 - `nestjs/architecture/clean/` — 삭제
-- `nestjs/architecture/layered/folder-structure.md` — 빈 파일이므로 삭제
+- `nestjs/architecture/layered/` — 전체 삭제 (신규 구조로 대체)
 
 ---
 
