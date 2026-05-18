@@ -1,0 +1,35 @@
+{
+  "name": "ai-conventions-cli",
+  "version": "1.0.0",
+  "description": "CLI to generate convention files from ai-conventions templates",
+  "main": "./dist/index.js",
+  "bin": {
+    "ai-conventions": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1",
+    "tar": "^7.5.15"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^8.2.10",
+    "@types/node": "^20.10.0",
+    "@types/tar": "^6.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.2"
+  }
+}

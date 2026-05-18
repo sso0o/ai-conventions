@@ -4,14 +4,17 @@ AI 코딩 어시스턴트(Claude, Cursor 등)가 프로젝트 컨벤션을 일�
 
 ## 개요
 
-각 프레임워크별로 네이밍, 폴더 구조, API 설계, 예외 처리 등의 컨벤션을 마크다운 템플릿으로 정의합니다. CLI를 통해 원하는 스택에 맞는 컨벤션 파일을 프로젝트에 바로 생성할 수 있습니다.
+각 프레임워크별로 네이밍, 폴더 구조, API 설계, 예외 처리 등의 컨벤션을 마크다운 템플릿으로 정의합니다. CLI를 통해 원하는 스택과 아키텍처를 선택하면 컨벤션 파일이 프로젝트에 자동으로 생성됩니다.
 
 ## 지원 스택
 
-| 영역 | 프레임워크 |
+| 영역 | 선택지 |
 |---|---|
-| Frontend | Next.js, Vite |
-| Backend | NestJS, Spring Boot |
+| Frontend | React + TypeScript |
+| Frontend 라우팅 | react-router (Vite/SPA), App Router (Next.js) |
+| Frontend 아키텍처 | Feature-Slice Design |
+| Backend | Spring Boot, NestJS |
+| Backend 아키텍처 | Layered Architecture, Clean Architecture |
 
 ## 빠른 시작
 
@@ -19,34 +22,63 @@ AI 코딩 어시스턴트(Claude, Cursor 등)가 프로젝트 컨벤션을 일�
 npx ai-conventions-cli init
 ```
 
-프롬프트에 따라 스택과 아키텍처를 선택하면 컨벤션 파일이 프로젝트 루트에 생성됩니다.
+프롬프트에 따라 스택과 아키텍처를 선택하면 다음 파일이 프로젝트 루트에 생성됩니다.
+
+```
+your-project/
+├── docs/
+│   ├── naming.md
+│   ├── frontend/
+│   │   ├── components.md
+│   │   ├── naming.md
+│   │   ├── routing.md
+│   │   ├── folder-structure.md
+│   │   ├── state-management.md
+│   │   ├── styling.md
+│   │   ├── typescript.md
+│   │   └── form-validation.md
+│   └── backend/
+│       ├── folder-structure.md
+│       ├── api-design.md
+│       ├── exception-handling.md
+│       ├── naming.md
+│       ├── response-format.md
+│       └── validation.md
+├── CLAUDE.md   # Claude Code용 컨벤션 참조 파일
+└── AGENTS.md   # 기타 AI 어시스턴트용 컨벤션 참조 파일
+```
 
 ## 템플릿 구조
 
 ```
 templates/
 ├── common/
-│   └── naming.md              # 공통 네이밍 규칙
+│   └── naming.md                      # 공통 네이밍 규칙
 ├── frontend/
-│   ├── nextjs/
-│   │   ├── architecture/      # clean / feature-slice 폴더 구조
-│   │   ├── components.md
-│   │   ├── naming.md
-│   │   ├── routing.md
-│   │   ├── state-management.md
-│   │   ├── styling.md
-│   │   ├── typescript.md
-│   │   └── form-validation.md
-│   └── vite/                  # (Next.js와 동일 구조)
+│   ├── components.md                  # 컴포넌트 작성 규칙
+│   ├── naming.md                      # 프론트엔드 네이밍 규칙
+│   ├── state-management.md
+│   ├── styling.md
+│   ├── typescript.md
+│   ├── form-validation.md
+│   ├── react-router/
+│   │   └── routing.md                 # Vite/SPA 라우팅 규칙
+│   ├── app-router/
+│   │   └── routing.md                 # Next.js App Router 규칙
+│   └── folder-structure.md
 └── backend/
     ├── nestjs/
-    │   ├── architecture/      # clean / layered 폴더 구조
     │   ├── api-design.md
     │   ├── exception-handling.md
     │   ├── naming.md
     │   ├── response-format.md
-    │   └── validation.md
-    └── spring-boot/           # (NestJS와 동일 구조)
+    │   ├── validation.md
+    │   └── architecture/
+    │       ├── layered/
+    │       │   └── folder-structure.md
+    │       └── clean/
+    │           └── folder-structure.md
+    └── spring-boot/            # (NestJS와 동일 구조)
 ```
 
 ## CLI 개발

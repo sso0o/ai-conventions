@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Copy-Item \"templates\\\\frontend\\\\architecture\\\\feature-slice\\\\folder-structure.md\" \"templates\\\\frontend\\\\folder-structure.md\")",
+      "Bash(git add *)",
+      "Bash(git rm *)",
+      "Bash(git commit *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Force)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}
