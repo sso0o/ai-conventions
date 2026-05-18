@@ -71,14 +71,6 @@ function copyFrontend(
     fse.copySync(routingPath, path.join(dst, 'routing.md'));
     copiedFiles.push('docs/frontend/routing.md');
   }
-
-  // Architecture folder structure - Always use feature-slice
-  const archPath = path.join(frontendSrc, 'architecture', 'feature-slice', 'folder-structure.md');
-
-  if (fse.pathExistsSync(archPath)) {
-    fse.copySync(archPath, path.join(dst, 'folder-structure.md'));
-    copiedFiles.push('docs/frontend/folder-structure.md');
-  }
 }
 
 function copyBackend(
