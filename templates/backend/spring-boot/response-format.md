@@ -1,0 +1,1 @@
+// templates/backend/spring-boot/response-format.md

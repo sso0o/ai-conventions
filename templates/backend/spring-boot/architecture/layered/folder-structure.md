@@ -1,0 +1,1 @@
+// templates/backend/spring-boot/architecture/layered/folder-structure.md

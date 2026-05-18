@@ -1,0 +1,1 @@
+// templates/frontend/nextjs/architecture/layered/folder-structure.md

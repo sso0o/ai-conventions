@@ -1,0 +1,1 @@
+// templates/frontend/vite/architecture/layered/folder-structure.md

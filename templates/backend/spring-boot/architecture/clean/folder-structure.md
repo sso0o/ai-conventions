@@ -1,0 +1,1 @@
+// templates/backend/spring-boot/architecture/clean/folder-structure.md
