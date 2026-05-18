@@ -3,9 +3,9 @@ import inquirer from 'inquirer';
 export interface Answers {
   frontend: 'react-typescript' | 'none';
   frontendRouting: 'react-router' | 'app-router';
-  frontendArchitecture: 'layered' | 'feature-slice';
   backend: 'spring-boot' | 'nestjs' | 'none';
   backendArchitecture: 'layered' | 'clean';
+  backendLayeredStyle: 'domain-integrated' | 'domain-separated';
 }
 
 export async function prompt(): Promise<Answers> {
@@ -31,16 +31,6 @@ export async function prompt(): Promise<Answers> {
     },
     {
       type: 'list',
-      name: 'frontendArchitecture',
-      message: '프론트엔드 아키텍처를 선택하세요:',
-      choices: [
-        { name: 'Layered Architecture', value: 'layered' },
-        { name: 'Feature-Slice Design', value: 'feature-slice' },
-      ],
-      when: (answers) => answers.frontend !== 'none',
-    },
-    {
-      type: 'list',
       name: 'backend',
       message: '백엔드 스택을 선택하세요:',
       choices: [
@@ -59,12 +49,22 @@ export async function prompt(): Promise<Answers> {
       ],
       when: (answers) => answers.backend !== 'none',
     },
+    {
+      type: 'list',
+      name: 'backendLayeredStyle',
+      message: '패키지 구조 방식을 선택하세요:',
+      choices: [
+        { name: '도메인 통합형 (레이어 우선: controller/user, service/user ...)', value: 'domain-integrated' },
+        { name: '도메인 분리형 (도메인 우선: user/controller, user/service ...)', value: 'domain-separated' },
+      ],
+      when: (answers) => answers.backend === 'spring-boot' && answers.backendArchitecture === 'layered',
+    },
   ]);
 
   return {
     ...raw,
     frontendRouting: (raw.frontendRouting as string | undefined) ?? 'react-router',
-    frontendArchitecture: (raw.frontendArchitecture as string | undefined) ?? 'layered',
     backendArchitecture: (raw.backendArchitecture as string | undefined) ?? 'layered',
+    backendLayeredStyle: (raw.backendLayeredStyle as string | undefined) ?? 'domain-integrated',
   } as Answers;
 }

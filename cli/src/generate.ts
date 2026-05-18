@@ -72,13 +72,11 @@ function copyFrontend(
     copiedFiles.push('docs/frontend/routing.md');
   }
 
-  // Architecture folder structure
-  const archPath = path.join(frontendSrc, 'architecture', answers.frontendArchitecture, 'folder-structure.md');
-  const fallbackPath = path.join(frontendSrc, 'architecture', 'layered', 'folder-structure.md');
-  const resolvedArch = fse.pathExistsSync(archPath) ? archPath : fallbackPath;
+  // Architecture folder structure - Always use feature-slice
+  const archPath = path.join(frontendSrc, 'architecture', 'feature-slice', 'folder-structure.md');
 
-  if (fse.pathExistsSync(resolvedArch)) {
-    fse.copySync(resolvedArch, path.join(dst, 'folder-structure.md'));
+  if (fse.pathExistsSync(archPath)) {
+    fse.copySync(archPath, path.join(dst, 'folder-structure.md'));
     copiedFiles.push('docs/frontend/folder-structure.md');
   }
 }
@@ -93,7 +91,11 @@ function copyBackend(
   const dst = path.join(docsDir, 'backend');
   fse.ensureDirSync(dst);
 
-  const archPath = path.join(stackSrc, 'architecture', answers.backendArchitecture, 'folder-structure.md');
+  const archPath =
+    answers.backend === 'spring-boot' && answers.backendArchitecture === 'layered'
+      ? path.join(stackSrc, 'architecture', 'layered', answers.backendLayeredStyle, 'folder-structure.md')
+      : path.join(stackSrc, 'architecture', answers.backendArchitecture, 'folder-structure.md');
+
   if (fse.pathExistsSync(archPath)) {
     fse.copySync(archPath, path.join(dst, 'folder-structure.md'));
     copiedFiles.push('docs/backend/folder-structure.md');
