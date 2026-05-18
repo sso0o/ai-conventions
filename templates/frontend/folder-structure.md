@@ -15,10 +15,10 @@ src/
 │   ├── hooks/            # 공통 훅
 │   ├── utils/            # 공통 유틸 함수 (날짜 포맷, 숫자 포맷 등)
 │   └── constants/        # 전역 공통 상수
-├── pages/                # 라우트 단위 페이지 컴포넌트
+├── pages/                # 라우트 단위 페이지 컴포넌트 (React Router 전용; App Router는 app/ 사용)
 ├── store/                # Zustand 전역 상태
 ├── lib/                  # axios, supabase 등 외부 라이브러리 설정
-├── router/               # 라우터 설정 및 인증 가드
+├── router/               # 라우터 설정 및 인증 가드 (React Router 전용; App Router는 파일시스템 라우팅 사용)
 └── types/                # 전역 공통 타입 정의
 ```
 
