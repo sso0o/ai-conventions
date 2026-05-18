@@ -54,7 +54,7 @@
 ## 예시 구조
 
 ```txt
-src/features/{domain}/
+src/features/{group}/{domain}/
   components/
     XxxFormModal.tsx
   schemas/
