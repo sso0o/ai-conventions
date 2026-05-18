@@ -19,3 +19,6 @@ store/
 ├── authStore.ts    # 인증 (기존)
 └── uiStore.ts      # 공통 UI 상태 (사이드바, 전역 모달 등)
 ```
+
+> **App Router 사용 시:** 서버 인증은 middleware + cookie 기반으로 처리합니다.
+> Zustand는 클라이언트 UI 상태 전용으로만 사용하며, 인증 여부 판단은 서버에서 처리합니다.
