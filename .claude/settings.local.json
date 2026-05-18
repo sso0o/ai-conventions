@@ -6,7 +6,12 @@
       "Bash(git rm *)",
       "Bash(git commit *)",
       "Bash(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Force)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "PowerShell(if \\(-not \\(Test-Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\\\\react-router\"\\)\\) { New-Item -ItemType Directory -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\\\\react-router\" -Force } else { Write-Host \"Directory already exists\" })",
+      "Bash(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Recurse -Force)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Sort-Object FullName)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Recurse | ForEach-Object { $_.FullName } | Sort-Object)"
     ]
   }
 }
