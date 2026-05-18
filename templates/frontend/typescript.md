@@ -15,7 +15,7 @@ const data: unknown = response.data;
 
 | 범위 | 위치 |
 |---|---|
-| 도메인 타입 (엔티티, 요청/응답) | `features/{domain}/types/index.ts` |
+| 도메인 타입 (엔티티, 요청/응답) | `features/{group}/{domain}/types/index.ts` |
 | 전역 공통 타입 | `src/types/index.ts` |
 
 ## API 응답 타입
