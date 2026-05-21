@@ -167,5 +167,4 @@ GET /users?page=1&size=20&sort=createdAt&order=desc
 ## 규칙
 
 - `message`는 위 기본값을 사용하되, 서비스 레이어에서 커스텀 메시지 지정 가능
-- 에러 응답 시 `success: false`, `data: null`로 고정
 - API 버전 관리를 하지 않는다 (URL prefix `/v1` 등 사용 금지)
