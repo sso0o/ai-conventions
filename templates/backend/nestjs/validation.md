@@ -94,3 +94,50 @@ export class CreateOrderDto {
   address: AddressDto;
 }
 ```
+
+## 커스텀 Validator 규칙
+
+기준: **DB 조회가 필요하면 서비스, 아니면 DTO 데코레이터**
+
+| 검증 유형 | 위치 | 예시 |
+|-----------|------|------|
+| 형식/패턴 검증 | DTO (`@ValidatorConstraint`) | 전화번호 포맷, 사업자번호 |
+| 비즈니스 규칙 검증 | 서비스 레이어 | 이메일 중복, 리소스 존재 여부 |
+
+### 형식 검증 — DTO 데코레이터로 추출
+
+```ts
+// ✅
+@ValidatorConstraint({ name: 'isKoreanPhone', async: false })
+export class IsKoreanPhoneConstraint implements ValidatorConstraintInterface {
+  validate(value: string) {
+    return /^010-\d{4}-\d{4}$/.test(value);
+  }
+  defaultMessage() {
+    return '올바른 휴대폰 번호 형식이 아닙니다 (010-0000-0000)';
+  }
+}
+
+export function IsKoreanPhone(options?: ValidationOptions): PropertyDecorator {
+  return applyDecorators(Validate(IsKoreanPhoneConstraint, options));
+}
+```
+
+### 비즈니스 규칙 검증 — 서비스에서 예외 throw
+
+```ts
+// ✅
+async createUser(dto: CreateUserDto) {
+  const exists = await this.userRepository.existsByEmail(dto.email);
+  if (exists) throw new ConflictException('이미 사용 중인 이메일입니다');
+}
+
+// ❌ — DB 조회가 필요한 검증을 @ValidatorConstraint에서 처리
+@ValidatorConstraint({ async: true })
+export class IsEmailUniqueConstraint implements ValidatorConstraintInterface {
+  constructor(private userRepository: UserRepository) {}
+  async validate(email: string) {
+    return !(await this.userRepository.existsByEmail(email));
+  }
+}
+```
