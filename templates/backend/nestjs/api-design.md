@@ -41,7 +41,7 @@ POST /orders/:id/cancel
 ## 요청 형식
 
 - **Path Parameter**: 단건 리소스 식별에 사용 (`/users/:id`)
-- **Query Parameter**: 필터링, 정렬, 페이지네이션에 사용
+- **Query Parameter**: 필터링, 정렬, 페이지네이션에 사용, DTO로 타입 정의
 - **Request Body**: POST/PATCH에서 JSON 사용, DTO로 타입 정의
 
 ### 페이지네이션 파라미터
