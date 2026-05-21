@@ -119,7 +119,15 @@ export class IsKoreanPhoneConstraint implements ValidatorConstraintInterface {
 }
 
 export function IsKoreanPhone(options?: ValidationOptions): PropertyDecorator {
-  return applyDecorators(Validate(IsKoreanPhoneConstraint, options));
+  return function (object, propertyName) {
+    registerDecorator({
+      target: object.constructor,
+      propertyName,
+      options,
+      constraints: [],
+      validator: IsKoreanPhoneConstraint,
+    });
+  };
 }
 ```
 
