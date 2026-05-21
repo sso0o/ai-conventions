@@ -6,6 +6,8 @@
 
 ```ts
 // main.ts
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+
 app.useGlobalFilters(new HttpExceptionFilter());
 ```
 
@@ -75,8 +77,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
       const message =
         typeof res === 'string'
           ? res
-          : typeof (res as any).message === 'string'
-            ? (res as any).message
+          : typeof (res as Record<string, unknown>).message === 'string'
+            ? (res as Record<string, unknown>).message
             : DEFAULT_MESSAGES[status] ?? '오류가 발생했습니다';
 
       if (status >= 500) {
