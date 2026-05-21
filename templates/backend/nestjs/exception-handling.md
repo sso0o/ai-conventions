@@ -133,3 +133,28 @@ try {
   throw new InternalServerErrorException('DB 오류');
 }
 ```
+
+## 비즈니스 에러 vs. 인프라 에러
+
+서비스에서 비즈니스 규칙을 검증할 때, 검증 **결과**에 의한 예외와 검증 중 발생한 **인프라 에러**는 다르게 처리한다.
+
+```ts
+// ✅ 비즈니스 결과로 throw, 인프라 에러는 전파
+async createUser(dto: CreateUserDto) {
+  const exists = await this.userRepository.existsByEmail(dto.email);
+  // existsByEmail이 DB 오류로 실패하면 → catch 없이 전파 → Filter가 500 처리
+  if (exists) throw new ConflictException('이미 사용 중인 이메일입니다');
+}
+
+// ❌ 인프라 에러를 catch해서 래핑 — 스택 트레이스 유실
+async createUser(dto: CreateUserDto) {
+  let exists: boolean;
+  try {
+    exists = await this.userRepository.existsByEmail(dto.email);
+  } catch (e) {
+    throw new InternalServerErrorException('DB 오류');
+  }
+  if (exists) throw new ConflictException('이미 사용 중인 이메일입니다');
+}
+```
+
