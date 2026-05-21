@@ -161,7 +161,7 @@ export class IsEmailUniqueConstraint implements ValidatorConstraintInterface {
 }
 ```
 
-> 비즈니스 검증 중 발생하는 인프라 에러 처리 방식은 `exception-handling.md` 참고.
+> 비즈니스 검증 중 발생하는 인프라 에러 처리 방식은 `exception-handling.md`의 `## 비즈니스 에러 vs. 인프라 에러` 참고.
 
 ## 에러 처리
 
