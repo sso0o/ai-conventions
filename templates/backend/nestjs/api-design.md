@@ -131,6 +131,39 @@ GET /users?page=1&size=20&sort=createdAt&order=desc
 | 리소스 없음 | 404 | `"리소스를 찾을 수 없습니다"` |
 | 서버 오류 | 500 | `"서버 오류가 발생했습니다"` |
 
+### 에러 응답
+
+에러 응답은 `success: false`로 고정한다.
+
+**일반 에러** — `data: null` 고정:
+
+```ts
+// 400, 401, 403, 404, 500 등
+{
+  "success": false,
+  "data": null,
+  "message": "리소스를 찾을 수 없습니다"
+}
+```
+
+**검증 실패 에러** — ValidationPipe 전용, `data.errors` 반환:
+
+```ts
+// 400
+{
+  "success": false,
+  "data": {
+    "errors": [
+      { "field": "email", "message": "올바른 이메일 형식이 아닙니다" },
+      { "field": "age", "message": "나이는 0 이상이어야 합니다" }
+    ]
+  },
+  "message": "잘못된 요청입니다"
+}
+```
+
+검증 실패 응답의 상세 처리 방식은 `validation.md` 참고.
+
 ## 규칙
 
 - `message`는 위 기본값을 사용하되, 서비스 레이어에서 커스텀 메시지 지정 가능
