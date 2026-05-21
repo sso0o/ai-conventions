@@ -153,7 +153,7 @@ export class IsEmailUniqueConstraint implements ValidatorConstraintInterface {
 ## 에러 처리
 
 - `exceptionFactory` 옵션 사용 금지 — 에러 응답 포맷은 전역 ExceptionFilter에서 일괄 처리한다 (→ `exception-handling.md` 참고)
-- ValidationPipe는 검증 실패 시 raw `BadRequestException`을 그대로 throw한다
+- ValidationPipe는 검증 실패 시 `BadRequestException`을 그대로 throw한다
 - 에러 메시지는 한국어로 작성한다
 
 ```ts
@@ -166,7 +166,7 @@ email: string;
 email: string;
 ```
 
-전역 ExceptionFilter가 ValidationPipe의 에러를 아래 형태로 변환한다:
+검증 실패 응답은 `api-design.md`의 일반 규칙(`data: null`)의 예외이며, 전역 ExceptionFilter가 `data.errors` 형태로 변환한다:
 
 ```ts
 // 400 응답 예시
