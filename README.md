@@ -90,6 +90,28 @@ npm run dev   # ts-node로 로컬 실행
 npm run build # dist/ 빌드
 ```
 
+## 배포
+
+CLI는 npm 패키지(`ai-conventions-cli`)로 배포됩니다. 템플릿 변경과 CLI 코드 변경의 배포 방식이 다릅니다.
+
+### 템플릿만 변경한 경우
+
+`templates/` 하위 파일만 수정했다면 **npm 배포 없이** `master` 브랜치에 머지하는 것으로 충분합니다. CLI가 실행될 때 GitHub의 `master` 브랜치 tarball을 직접 다운로드하기 때문에 사용자는 항상 최신 템플릿을 받게 됩니다.
+
+### CLI 코드를 변경한 경우
+
+`cli/src/` 하위 파일을 수정했다면 npm 배포가 필요합니다.
+
+```bash
+# 1. cli/package.json의 version 필드를 올린다 (예: 1.0.1 → 1.0.2)
+
+# 2. 빌드 + 배포 (prepublishOnly로 빌드가 자동 실행됨)
+cd cli
+npm publish
+```
+
+> npm 배포 권한이 있는 계정으로 로그인되어 있어야 합니다 (`npm whoami`로 확인).
+
 ## 컨벤션 추가 방법
 
 1. `templates/<영역>/<프레임워크>/` 아래에 마크다운 파일을 추가합니다.
