@@ -16,6 +16,8 @@ app.useGlobalPipes(new ValidationPipe({ ... }));
 export class UserController {}
 ```
 
+`ValidationException`은 `exception-handling.md`에서 정의한다.
+
 ```ts
 app.useGlobalPipes(
   new ValidationPipe({
@@ -161,9 +163,9 @@ export class IsEmailUniqueConstraint implements ValidatorConstraintInterface {
 
 ## 에러 처리
 
-- `exceptionFactory`는 응답 포맷 결정 목적으로는 사용 금지 — 에러 응답 포맷은 전역 ExceptionFilter에서 일괄 처리한다 (→ `exception-handling.md` 참고)
-- `exceptionFactory`는 `ValidationException` 생성을 위한 구조 보존 목적으로만 허용한다
 - ValidationPipe는 검증 실패 시 `ValidationException`을 throw한다
+- `exceptionFactory`는 `ValidationException` 생성을 위한 구조 보존 목적으로만 허용한다
+- `exceptionFactory`는 응답 포맷 결정 목적으로는 사용 금지 — 에러 응답 포맷은 전역 ExceptionFilter에서 일괄 처리한다 (→ `exception-handling.md` 참고)
 - 에러 메시지는 한국어로 작성한다
 
 ```ts
