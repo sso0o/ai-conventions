@@ -13,7 +13,9 @@
       "Bash(Sort-Object FullName)",
       "PowerShell(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Recurse | ForEach-Object { $_.FullName } | Sort-Object)",
       "Bash(grep -v \"^commit\\\\|^Author\\\\|^Date\\\\|^$\\\\|chore:\")",
-      "Bash(git -C \"C:/IDEAWorkspace/SYCHOI/ai-conventions\" log --oneline)"
+      "Bash(git -C \"C:/IDEAWorkspace/SYCHOI/ai-conventions\" log --oneline)",
+      "Bash(git -C /Users/choesoyeon/IdeaProjects/ai-conventions add docs/superpowers/plans/2026-05-21-nestjs-validation.md)",
+      "Bash(git -C /Users/choesoyeon/IdeaProjects/ai-conventions commit -m ' *)"
     ]
   }
 }
