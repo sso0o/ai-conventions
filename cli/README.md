@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/ai-conventions-cli)](https://www.npmjs.com/package/ai-conventions-cli)
 
 Generate AI coding assistant convention files (`CLAUDE.md`, `AGENTS.md`, `docs/`) for your project.  
-AI 코딩 어시스턴트(Claude, Cursor 등)가 프로젝트 컨벤션을 따르도록 규칙 파일을 자동으로 생성합니다.
+AI 코딩 어시스턴트(Claude, Codex 등)가 프로젝트 컨벤션을 따르도록 규칙 파일을 자동으로 생성합니다.
 
 ## Supported Stacks
 

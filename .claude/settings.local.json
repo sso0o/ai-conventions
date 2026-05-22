@@ -5,6 +5,7 @@
       "Bash(git add *)",
       "Bash(git rm *)",
       "Bash(git commit *)",
+      "Bash(git push *)",
       "Bash(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Force)",
       "Bash(npx tsc *)",
       "PowerShell(if \\(-not \\(Test-Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\\\\react-router\"\\)\\) { New-Item -ItemType Directory -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\\\\react-router\" -Force } else { Write-Host \"Directory already exists\" })",
@@ -14,8 +15,18 @@
       "PowerShell(Get-ChildItem -Path \"C:\\\\IDEAWorkspace\\\\SYCHOI\\\\ai-conventions\\\\templates\\\\frontend\" -Recurse | ForEach-Object { $_.FullName } | Sort-Object)",
       "Bash(grep -v \"^commit\\\\|^Author\\\\|^Date\\\\|^$\\\\|chore:\")",
       "Bash(git -C \"C:/IDEAWorkspace/SYCHOI/ai-conventions\" log --oneline)",
-      "Bash(git -C /Users/choesoyeon/IdeaProjects/ai-conventions add docs/superpowers/plans/2026-05-21-nestjs-validation.md)",
-      "Bash(git -C /Users/choesoyeon/IdeaProjects/ai-conventions commit -m ' *)"
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:brainstorming:*)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:writing-plans:*)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Skill(superpowers:subagent-driven-development:*)",
+      "Bash(grep -v \"^app-router$\")",
+      "Bash(grep -v \"^react-router$\")",
+      "Bash(grep -v \"^architecture$\")",
+      "Skill(superpowers:finishing-a-development-branch)",
+      "Skill(superpowers:finishing-a-development-branch:*)",
+      "Bash(npm run *)"
     ]
   }
 }
